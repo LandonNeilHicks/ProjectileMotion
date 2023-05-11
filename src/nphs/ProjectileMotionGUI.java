@@ -22,8 +22,18 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
      */
     public ProjectileMotionGUI() {
         initComponents();
-        double vel = Double.parseDouble(velocityInput.getText());
-        double theta = Double.parseDouble(angleInput.getText());
+        double vel;
+        double theta;
+        if(velocityInput.getText() == null){
+            vel = 0;
+        }else{
+            vel = Double.parseDouble(velocityInput.getText());
+        }
+        if(angleInput.getText() == null){
+            theta = 0;
+        }else{
+            theta = Double.parseDouble(angleInput.getText());
+        }
         projectile.setXVel((Math.cos(theta)) * vel);
         projectile.setYVel(Math.sin(theta)* vel);
         panel.update();
