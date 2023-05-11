@@ -22,11 +22,27 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
      */
     public ProjectileMotionGUI() {
         initComponents();
+        double vel = Double.parseDouble(velocityInput.getText());
+        double theta = Double.parseDouble(angleInput.getText());
+        projectile.setXVel((Math.cos(theta)) * vel);
+        projectile.setYVel(Math.sin(theta)* vel);
+        panel.update();
+        
+        
         //projectile.setXVel(initialVelocityInput.getValue());
+        updateTimer = new Timer(50, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                panel.updatePhysics(50);
+                
+                
+            }
+        });
         
-        
-        
+        updateTimer.start();
     }
+        
+        
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,10 +60,13 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         launchButton = new javax.swing.JButton();
+        velocityInput = new javax.swing.JTextField();
+        angleInput = new javax.swing.JTextField();
+        yPosInput = new javax.swing.JTextField();
         projectilePanel1 = new nphs.ProjectilePanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         initialVelocityInput.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         initialVelocityInput.setName(""); // NOI18N
@@ -60,6 +79,12 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
 
         launchButton.setText("Launch!");
 
+        angleInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                angleInputActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout projectilePanel1Layout = new javax.swing.GroupLayout(projectilePanel1);
         projectilePanel1.setLayout(projectilePanel1Layout);
         projectilePanel1Layout.setHorizontalGroup(
@@ -68,14 +93,14 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
         );
         projectilePanel1Layout.setVerticalGroup(
             projectilePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 259, Short.MAX_VALUE)
+            .addGap(0, 270, Short.MAX_VALUE)
         );
 
-        jTextField1.setText("jTextField1");
+        jLabel1.setText("Initial Y Pos:");
 
-        jTextField2.setText("jTextField2");
+        jLabel2.setText("Launch Angle:");
 
-        jTextField3.setText("jTextField3");
+        jLabel3.setText("Initial Vel:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,15 +109,21 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(projectilePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(velocityInput, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                        .addComponent(launchButton))
-                    .addComponent(projectilePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(angleInput, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(yPosInput, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(launchButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,14 +134,21 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(launchButton)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(velocityInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(angleInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yPosInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void angleInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_angleInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_angleInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,16 +186,19 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField angleInput;
     private javax.swing.JSpinner initialVelocityInput;
     private javax.swing.JSpinner initialYPosition;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JSpinner launchAngleInput;
     private javax.swing.JButton launchButton;
     private nphs.ProjectilePanel projectilePanel1;
+    private javax.swing.JTextField velocityInput;
+    private javax.swing.JTextField yPosInput;
     // End of variables declaration//GEN-END:variables
 }

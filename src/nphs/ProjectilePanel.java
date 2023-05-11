@@ -30,10 +30,13 @@ public class ProjectilePanel extends JPanel{
         projectile.paint(g);
     }
     
-    public void update(double deltaTime){
+    public void update(){
         projectile.setMaxXPosition(getWidth());
-        projectile.setMaxXPosition(getWidth());
-        projectile.setXPos(projectile.getXVel() * deltaTime );
+        projectile.setMaxYPosition(getHeight());
+        repaint();
+    }
+    public void updatePhysics(double deltaTime){
+        projectile.setXPos(projectile.getXPos() + projectile.getXVel() * deltaTime );
         projectile.setYPos(projectile.getYVel() * deltaTime);
         repaint();
     }
