@@ -39,7 +39,7 @@ public class ProjectilePanel extends JPanel{
         projectile.setXPos(projectile.getXPos() + projectile.getXVel() * deltaTime );
         projectile.setYPos(projectile.getYPos() + projectile.getYVel() * deltaTime);
         repaint();
-        System.out.println("hey");
+        System.out.println("Physic Call");
     }
         
 }
