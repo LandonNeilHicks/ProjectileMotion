@@ -44,7 +44,13 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
         double yPos = getHeight();
         panel = new ProjectilePanel();
         panel.update();
-       
+       updateTimer = new Timer(50, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                panel.updatePhysics(50);
+                repaint();
+                
+            }
+        });
         
         
     }
@@ -166,14 +172,8 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_angleInputActionPerformed
 
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
-        updateTimer = new Timer(50, new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                panel.updatePhysics(50);
-                
-                
-            }
-        });
         
+        System.out.println("Button Click");
         updateTimer.start();
     
     }//GEN-LAST:event_launchButtonActionPerformed
