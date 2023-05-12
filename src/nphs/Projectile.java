@@ -22,13 +22,15 @@ public class Projectile {
     private int radius;
     private Color color;
     
+    
+    
     public Projectile(double xV,double yV, double xP, double yP){
         xVelocity = xV;
         yVelocity = yV;
         xPosition = xP;
         yPosition = yP;   
         radius = 5;
-        color = new Color(0,0,0);
+        color = new Color(255,255,255);
     }
     public void paint(Graphics g){
         g.setColor(color);

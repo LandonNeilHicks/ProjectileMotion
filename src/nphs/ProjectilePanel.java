@@ -20,7 +20,7 @@ public class ProjectilePanel extends JPanel{
     public ProjectilePanel(){
        super();
        BACKGROUND_COLOR = new Color (200, 0, 100);
-       projectile = new Projectile(0,0,0,0);
+       projectile = new Projectile(5,5,20,250);
     }
     
     public void paintComponent(Graphics g){
@@ -37,7 +37,7 @@ public class ProjectilePanel extends JPanel{
     }
     public void updatePhysics(double deltaTime){
         projectile.setXPos(projectile.getXPos() + projectile.getXVel() * deltaTime );
-        projectile.setYPos(projectile.getYVel() * deltaTime);
+        projectile.setYPos(projectile.getYPos() + projectile.getYVel() * deltaTime);
         repaint();
     }
         
