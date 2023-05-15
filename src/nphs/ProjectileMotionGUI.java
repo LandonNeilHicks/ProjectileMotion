@@ -46,7 +46,7 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
         panel.update();
        updateTimer = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                panel.updatePhysics(50);
+                projectilePanel1.updatePhysics(30);
                 repaint();
                 
             }
