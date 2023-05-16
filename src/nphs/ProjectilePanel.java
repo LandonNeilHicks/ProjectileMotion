@@ -41,6 +41,9 @@ public class ProjectilePanel extends JPanel{
     public void setYVel(double newVel){
         projectile.setYVel(newVel);
     }
+    public void setXPos( double newPos){
+        projectile.setXPos(newPos);
+    }
     
     public void update(){
         projectile.setMaxXPosition(getWidth());

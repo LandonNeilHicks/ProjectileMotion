@@ -191,6 +191,7 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
         
         System.out.println("Button Click");
+        projectilePanel1.setXPos(0.0);
         projectilePanel1.setYPos(getYPos());
         projectilePanel1.setXVel(getXVel());
         projectilePanel1.setYVel(getYVel());
