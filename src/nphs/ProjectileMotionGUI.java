@@ -15,7 +15,6 @@ import javax.swing.Timer;
 public class ProjectileMotionGUI extends javax.swing.JFrame {
     private Timer updateTimer;
     private Projectile projectile;
-    private ProjectilePanel panel;
     private static double yVelI;
     private static double xVelI;
     
@@ -25,25 +24,7 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
      */
     public ProjectileMotionGUI() {
         initComponents();
-        
-        double vel;
-        double theta;
-        if(velocityInput.getText()== null || velocityInput.getText().equals("")){
-            vel = 0;
-        }else{
-            vel = Double.parseDouble(velocityInput.getText());
-        }
-        if(angleInput.getText() == null || angleInput.getText().equals("")){
-            theta = 0;
-        }else{
-           theta = Double.parseDouble(angleInput.getText());
-        }
-        xVelI = Math.sin(theta) * vel;
-        yVelI = Math.cos(theta) * vel;
-        double xPos = 0;
-        double yPos = getHeight();
-        panel = new ProjectilePanel();
-        panel.update();
+        projectilePanel1.update();
        updateTimer = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 projectilePanel1.updatePhysics(30);
@@ -54,14 +35,50 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
         
         
     }
+    double vel;
+    double theta;
+    public double getYVel (){
         
+        if(velocityInput.getText()== null || velocityInput.getText().equals("")){
+            vel = 0;
+        }else{
+            vel =(Double.parseDouble(velocityInput.getText()));
+        }
+        if(angleInput.getText() == null || angleInput.getText().equals("")){
+            theta = 0;
+        }else{
+           theta = Double.parseDouble(angleInput.getText());
+        }
+        return -1 * (Math.sin(theta) * vel);
         
-    public static double getInitialYVel(){
-        return yVelI;
     }
-    public static double getInitialXVel(){
-        return xVelI;
+    public double getXVel (){
+        
+        if(velocityInput.getText()== null || velocityInput.getText().equals("")){
+            vel = 0;
+        }else{
+            vel =(Double.parseDouble(velocityInput.getText()));
+        }
+        if(angleInput.getText() == null || angleInput.getText().equals("")){
+            theta = 0;
+        }else{
+           theta = Double.parseDouble(angleInput.getText());
+        }
+        return Math.cos(theta) * vel;
     }
+    
+    public double getYPos(){
+        if (yPosInput.getText() != null || yPosInput.getText() != "")
+        {
+            String input = yPosInput.getText();
+            double newPos = Double.parseDouble(input);
+            return newPos;
+        }
+        else{
+            return 260;
+        }
+    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,6 +191,9 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
         
         System.out.println("Button Click");
+        projectilePanel1.setYPos(getYPos());
+        projectilePanel1.setXVel(getXVel());
+        projectilePanel1.setYVel(getYVel());
         updateTimer.start();
     
     }//GEN-LAST:event_launchButtonActionPerformed

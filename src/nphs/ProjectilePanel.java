@@ -20,7 +20,7 @@ public class ProjectilePanel extends JPanel{
     public ProjectilePanel(){
        super();
        BACKGROUND_COLOR = new Color (200, 0, 100);
-       projectile = new Projectile(.1,-1,20,250);
+       projectile = new Projectile(0,0,0,0);
     }
     
     public void paintComponent(Graphics g){
@@ -29,6 +29,18 @@ public class ProjectilePanel extends JPanel{
         g.fillRect(0,0,getWidth(),getHeight());
         projectile.paint(g);
     }
+    public void paintAirBall(Graphics g){
+        projectile.paint(g);
+    }
+    public void setYPos( double newPos){
+        projectile.setYPos(newPos);
+    }
+    public void setXVel( double newVel){
+        projectile.setXVel(newVel);
+    }
+    public void setYVel(double newVel){
+        projectile.setYVel(newVel);
+    }
     
     public void update(){
         projectile.setMaxXPosition(getWidth());
@@ -36,12 +48,15 @@ public class ProjectilePanel extends JPanel{
         repaint();
     }
     public void updatePhysics(double deltaTime){
-        if(projectile.getXPos() < getWidth()  && projectile.getYPos() < getHeight() ){
+        if(projectile.getXPos() < getWidth() - 10  && projectile.getYPos() <= getHeight() - 5 ){
             projectile.setYVel(projectile.getYVel() + .001 * deltaTime);
             projectile.setXPos(projectile.getXPos() + projectile.getXVel() * deltaTime );
             projectile.setYPos(projectile.getYPos() + projectile.getYVel() * deltaTime);
+            //paintAirBall(g);
             repaint();
-            System.out.println("Physic Call");
+            System.out.print("Physics Updated");
+            
+            
         }
     }
         
