@@ -49,7 +49,7 @@ public class Projectile {
         xPosition = xP;
     }
     public void setYPos(double yP){
-        xPosition = yP;
+        yPosition = yP;
     }
     public double getXVel(){
         return xVelocity;

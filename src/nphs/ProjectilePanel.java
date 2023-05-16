@@ -20,7 +20,7 @@ public class ProjectilePanel extends JPanel{
     public ProjectilePanel(){
        super();
        BACKGROUND_COLOR = new Color (200, 0, 100);
-       projectile = new Projectile(5,5,20,250);
+       projectile = new Projectile(.1,-1,20,250);
     }
     
     public void paintComponent(Graphics g){
@@ -36,10 +36,13 @@ public class ProjectilePanel extends JPanel{
         repaint();
     }
     public void updatePhysics(double deltaTime){
-        projectile.setXPos(projectile.getXPos() + projectile.getXVel() * deltaTime );
-        projectile.setYPos(projectile.getYPos() + projectile.getYVel() * deltaTime);
-        repaint();
-        System.out.println("Physic Call");
+        if(projectile.getXPos() < getWidth()  && projectile.getYPos() < getHeight() ){
+            projectile.setYVel(projectile.getYVel() + .001 * deltaTime);
+            projectile.setXPos(projectile.getXPos() + projectile.getXVel() * deltaTime );
+            projectile.setYPos(projectile.getYPos() + projectile.getYVel() * deltaTime);
+            repaint();
+            System.out.println("Physic Call");
+        }
     }
         
 }
