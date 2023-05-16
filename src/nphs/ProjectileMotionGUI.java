@@ -47,28 +47,28 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
         if(angleInput.getText() == null || angleInput.getText().equals("")){
             theta = 0;
         }else{
-           theta = Double.parseDouble(angleInput.getText());
+           theta = Double.parseDouble(angleInput.getText()) * (Math.PI/180);
         }
         return -1 * (Math.sin(theta) * vel);
         
     }
     public double getXVel (){
         
-        if(velocityInput.getText()== null || velocityInput.getText().equals("")){
+        if(velocityInput.getText()== null && velocityInput.getText().equals("")){
             vel = 0;
         }else{
             vel =(Double.parseDouble(velocityInput.getText()));
         }
-        if(angleInput.getText() == null || angleInput.getText().equals("")){
+        if(angleInput.getText() == null && angleInput.getText().equals("")){
             theta = 0;
         }else{
-           theta = Double.parseDouble(angleInput.getText());
+           theta = (Double.parseDouble(angleInput.getText())) * (Math.PI/180);
         }
         return Math.cos(theta) * vel;
     }
     
     public double getYPos(){
-        if (yPosInput.getText() != null || yPosInput.getText() != "")
+        if (yPosInput.getText() != null && yPosInput.getText() != "")
         {
             String input = yPosInput.getText();
             double newPos = Double.parseDouble(input);
@@ -191,6 +191,7 @@ public class ProjectileMotionGUI extends javax.swing.JFrame {
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
         
         System.out.println("Button Click");
+        projectilePanel1.clearImage();
         projectilePanel1.setXPos(0.0);
         projectilePanel1.setYPos(getYPos());
         projectilePanel1.setXVel(getXVel());
